@@ -1,0 +1,51 @@
+
+# Projet : Génération et Traduction de Texte
+
+## Prérequis
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
+1. Python 3.10 
+2. Les bibliothèques Python nécessaires (énumérées ci-dessous)
+
+ --------Installation des dépendances------------------------
+1. Clonez ou téléchargez le projet sur votre machine locale.
+2. Ouvrez un terminal et naviguez jusqu'au répertoire du projet.
+
+3. Installez les bibliothèques Python nécessaires en utilisant pip :
+
+pip install flask
+pip install gradio
+pip install transformers
+pip install torch  
+pip install sacremoses  
+
+ou Commande combinée:
+pip install flask gradio transformers torch sacremoses
+
+------------Le projet---------------------------------------------------------
+Le projet contient les fichiers suivants :
+- `app.py` : le script principal pour exécuter l'application Flask.
+- `templates/index.html` : le fichier HTML pour l'interface utilisateur.
+- `static/style.css` : le fichier CSS pour le style de la page.
+- `static/spinner.gif` : l'image du spinner de chargement.
+
+---------- Exécution du projet--------------------------------------------------
+1. Assurez-vous d'avoir installé toutes les dépendances nécessaires.
+2. Dans le terminal, exécutez la commande suivante pour démarrer l'application Flask :
+```
+python app.py
+```
+3. Ouvrez votre navigateur web et accédez à l'adresse suivante :
+```
+http://127.0.0.1:5000
+```
+
+----------Utilisation de l'application-----------------------------
+1. Entrez une séquence de mots dans le champ de texte.
+2. Cliquez sur le bouton "Générer et Traduire".
+3. Attendez que le texte soit généré et traduit. Le processus peut prendre un certain temps, mais vous verrez un spinner de chargement et un minuteur indiquant le temps écoulé.
+
+---------- Notes---------------------------------------------------
+- Cette application utilise le modèle GPT-2 pour la génération de texte et le modèle Helsinki-NLP/opus-mt-en-fr pour la traduction.
+- La génération de texte peut prendre un certain temps en fonction de la longueur du texte et de la capacité de votre machine.
+
+
