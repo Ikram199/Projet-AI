@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Génération et Traduction de Texte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function generateText() {
+            const inputText = document.getElementById('inputText').value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input_text: inputText })
+            });
+
+            const result = await response.json();
+            document.getElementById('generatedText').innerText = result.generated_text;
+            document.getElementById('translatedText').innerText = result.translated_text;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Génération et Traduction de Texte</h1>
+    <p>Entrez une séquence de mots. GPT-2 générera le texte suivant, et ce texte généré sera traduit en français.</p>
+    <input type="text" id="inputText" placeholder="Entrez votre texte ici">
+    <button onclick="generateText()">Générer et Traduire</button>
+    <h2>Texte Généré</h2>
+    <div id="generatedText"></div>
+    <h2>Texte Traduit</h2>
+    <div id="translatedText"></div>
+</body>
+
+</html>
