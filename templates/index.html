@@ -7,8 +7,32 @@
     <title>Génération et Traduction de Texte</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script>
+        let timerInterval;
+        function startTimer() {
+            const timer = document.getElementById('timer');
+            let seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                timer.innerText = `Temps écoulé: ${seconds} secondes`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            const timer = document.getElementById('timer');
+            timer.innerText = '';
+        }
+
         async function generateText() {
             const inputText = document.getElementById('inputText').value;
+            const generatedTextDiv = document.getElementById('generatedText');
+            const translatedTextDiv = document.getElementById('translatedText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            // Show loading spinner and start timer
+            loadingSpinner.style.display = 'block';
+            startTimer();
+
             const response = await fetch('/generate', {
                 method: 'POST',
                 headers: {
@@ -18,8 +42,13 @@
             });
 
             const result = await response.json();
-            document.getElementById('generatedText').innerText = result.generated_text;
-            document.getElementById('translatedText').innerText = result.translated_text;
+
+            // Hide loading spinner and stop timer
+            loadingSpinner.style.display = 'none';
+            stopTimer();
+
+            generatedTextDiv.innerText = result.generated_text;
+            translatedTextDiv.innerText = result.translated_text;
         }
     </script>
 </head>
@@ -29,6 +58,10 @@
     <p>Entrez une séquence de mots. GPT-2 générera le texte suivant, et ce texte généré sera traduit en français.</p>
     <input type="text" id="inputText" placeholder="Entrez votre texte ici">
     <button onclick="generateText()">Générer et Traduire</button>
+    <div id="timer"></div>
+    <div id="loadingSpinner" style="display:none;">
+        <img src="../static/spinner.gif" alt="Loading..." />
+    </div>
     <h2>Texte Généré</h2>
     <div id="generatedText"></div>
     <h2>Texte Traduit</h2>

@@ -63,3 +63,13 @@ h2 {
     margin-bottom: 20px;
     white-space: pre-wrap;
 }
+
+#timer {
+    font-size: 1em;
+    color: #777;
+    margin-top: 20px;
+}
+
+#loadingSpinner {
+    margin-top: 20px;
+}
