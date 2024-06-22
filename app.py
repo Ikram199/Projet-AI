@@ -3,15 +3,15 @@ from transformers import pipeline
 
 app = Flask(__name__)
 
-# Charger le pipeline de génération de texte
+
 generator = pipeline('text-generation', model='gpt2')
 
-# Charger le pipeline de traduction (anglais vers français dans ce cas)
+
 translator = pipeline('translation_en_to_fr', model='Helsinki-NLP/opus-mt-en-fr')
 
 def generate_and_translate(input_text):
-    # Générer du texte
-    generated_outputs = generator(input_text, max_length=100, num_return_sequences=1)
+
+    generated_outputs = generator(input_text, max_length=20, num_return_sequences=1)
     generated_text = generated_outputs[0]['generated_text']
 
     # Traduire le texte généré
